@@ -4,6 +4,5 @@ node_modules/
 build/
 tmp/
 temp/
-*yml
 dados_postgres
 .env
