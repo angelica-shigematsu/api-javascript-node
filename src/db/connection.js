@@ -11,7 +11,7 @@ var dataSource = new typeorm.DataSource({
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-    synchronize: true,
+    synchronize: false,
     entities: ['src/entity/*js'],
     migrations: ['migrations/*js'],
     cli: {
