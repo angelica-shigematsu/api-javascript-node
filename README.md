@@ -1,4 +1,4 @@
-# Projeto de autentificação
+# Projeto de autenticação
 
 Goal:
 - create user (signup) 
