@@ -1,6 +1,8 @@
 import DataSource from'../db/connection.js'
 const userRepository = DataSource.getRepository("User")
 
+import HashPassword from '../utils/hashPassword.js'
+
 const createSignup = async (req, res) => {
 
   try {
@@ -13,14 +15,16 @@ const createSignup = async (req, res) => {
     if (exitsEmail) throw new Error(`Email already exists`)
 
     if (password != confirmPassword) throw new Error(`Password don't match`)
-    
+      
+    const hashPassword = await HashPassword.transferHashPassword(password)
+
     const user = {
       name,
       lastname,
       birthDate,
       phone,
       email,
-      password,
+      password: hashPassword,
       active
     }
     
@@ -33,7 +37,38 @@ const createSignup = async (req, res) => {
 }
 
 const listAllUsers = async(req, res) => {
-  const users = await userRepository.find()
+  const users = await userRepository.find({
+    select: {
+      name: {
+        id: true,
+        name: true
+      },
+      lastname: {
+        id: true,
+        name: true
+      },
+      lastname: {
+        id: true,
+        name: true
+      },
+      birthDate: {
+        id: true,
+        name: true
+      },
+      phone: {
+        id: true,
+        name: true
+      },
+      email: {
+        id: true,
+        name: true
+      },
+      active: {
+        id: true,
+        name: true
+      }
+    }
+  })
 
   res.status(200).json(users)
 }
